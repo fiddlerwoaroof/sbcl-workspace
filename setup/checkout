@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -eu -o pipefail
+
+git clone git://git.code.sf.net/p/sbcl/sbcl /sbcl-build
+   
+cd /sbcl-build
+git checkout "${version}"

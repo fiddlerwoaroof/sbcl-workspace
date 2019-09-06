@@ -1,0 +1,49 @@
+(defpackage :fwoar.repl-utils
+  (:use :cl)
+  (:export clone github))
+
+(in-package :cl-user)
+
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (load "~/quicklisp/setup.lisp"))
+
+(eval-when (:compile-toplevel :load-toplevel :execute)
+  (ql:quickload :legit)
+  (shadow 'load))
+
+(defun load (pathspec &rest args)
+  (restart-case (apply #'cl:load pathspec args)
+    (retry () (apply #'load pathspec args))))
+
+(defun home-relative-pathname (pathname)
+  (merge-pathnames pathname
+                   (user-homedir-pathname)))
+
+(pushnew (list "SYS:SITE;**;*.*.*"
+               (home-relative-pathname 
+                 (make-pathname :directory '(:relative ".sbcl" "site" :wild-inferiors) 
+                                :name :wild 
+                                :type :wild)))
+         (logical-pathname-translations "SYS")
+         :test #'equal)
+
+(setf (logical-pathname-translations "QL")
+      `(("QL:LOCAL-PROJECTS;**;*.*.*" ,(home-relative-pathname #p"quicklisp/local-projects/**/*.*"))
+        ("QL:SOFTWARE;**;*.*.*" ,(home-relative-pathname #p"quicklisp/local-projects/**/*.*"))))
+
+(mapcar (lambda (_) 
+          (load-logical-pathname-translations 
+            (pathname-name _)))
+        (directory #p"SYS:SITE;*.translations"))
+
+(defun fwoar.repl-utils:clone (repo name)
+  (legit:clone repo
+               (translate-logical-pathname (make-pathname :host "QL"
+                                                          :directory  (list :absolute
+                                                                            "LOCAL-PROJECTS"
+                                                                            name)))))
+
+(defun fwoar.repl-utils:github (user repo)
+  (fwoar.repl-utils:clone (format nil "https://github.com/~a/~a"
+                                  user repo)
+                          repo))

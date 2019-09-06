@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -eu -o pipefail
+
+apt-get purge -y sbcl
+apt-get install -y apt-rdepends
+apt-get purge --autoremove -y $(apt-rdepends --build-depends --follow=DEPENDS sbcl | awk '$1 == "Build-Depends:" {print $2}'  | tr '\n' ' ' 2>/dev/null) apt-rdepends
+apt-get autoremove -y
