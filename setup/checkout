@@ -4,4 +4,9 @@ set -eu -o pipefail
 git clone git://git.code.sf.net/p/sbcl/sbcl /sbcl-build
    
 cd /sbcl-build
+
+if [[ "$version" == "latest" ]]; then
+  version=master
+fi
+
 git checkout "${version}"
