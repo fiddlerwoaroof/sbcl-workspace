@@ -5,7 +5,7 @@ RUN /setup/apt
 
 WORKDIR /root
 ARG version=master
-ENV version=$DOCKER_TAG
+ENV version=$version
 
 RUN /setup/checkout
 

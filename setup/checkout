@@ -5,7 +5,7 @@ git clone git://git.code.sf.net/p/sbcl/sbcl /sbcl-build
    
 cd /sbcl-build
 
-if [[ "${version:-"$DOCKER_TAG"}" == "latest" ]]; then
+if [[ "${version}" == "latest" ]]; then
   version=master
 fi
 
