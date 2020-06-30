@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -eu -o pipefail
+
+cd /sbcl-build
+
+./install.sh
+
+cd /root
+
+curl https://beta.quicklisp.org/quicklisp.lisp -Oquicklisp.lisp
+/usr/local/bin/sbcl --load quicklisp.lisp --eval '(quicklisp-quickstart:install)' --quit
+rm quicklisp.lisp
+
+rm -rf /sbcl-build
+
+/setup/cleanup
+
+
