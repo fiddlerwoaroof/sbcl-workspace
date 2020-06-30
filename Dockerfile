@@ -13,7 +13,7 @@ RUN /setup/build
 
 FROM bitnami/minideb:buster
 
-RUN apt-get update && apt-get install git
+RUN apt-get update && apt-get install -y git make curl
 COPY setup/install /root/install
 COPY sbclrc /root/.sbclrc
 

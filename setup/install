@@ -12,7 +12,3 @@ curl https://beta.quicklisp.org/quicklisp.lisp -Oquicklisp.lisp
 rm quicklisp.lisp
 
 rm -rf /sbcl-build
-
-/setup/cleanup
-
-
