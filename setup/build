@@ -9,7 +9,7 @@ apt-get build-dep -y sbcl
 
 cd /root
 
-wget https://beta.quicklisp.org/quicklisp.lisp -Oquicklisp.lisp
+curl https://beta.quicklisp.org/quicklisp.lisp -Oquicklisp.lisp
 /usr/local/bin/sbcl --load quicklisp.lisp --eval '(quicklisp-quickstart:install)' --quit
 rm quicklisp.lisp
 
