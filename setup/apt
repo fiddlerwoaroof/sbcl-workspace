@@ -2,7 +2,7 @@
 
 set -eu -o pipefail
 
-echo 'deb-src http://mirrors.kernel.org/debian/ buster main contrib' > /etc/apt/sources.list.d/src.list
+echo 'deb-src http://mirrors.kernel.org/debian/ bookworm main contrib' > /etc/apt/sources.list.d/src.list
 apt-get update -y
 apt-get dist-upgrade -y
-apt-get install -y sbcl git curl
+apt-get install -y sbcl git curl libzstd-dev

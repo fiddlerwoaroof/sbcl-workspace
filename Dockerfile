@@ -1,4 +1,4 @@
-FROM bitnami/minideb:buster AS builder
+FROM bitnami/minideb:bookworm AS builder
 
 COPY setup /setup
 RUN /setup/apt
