@@ -11,7 +11,7 @@ RUN /setup/checkout
 
 RUN /setup/build
 
-FROM bitnami/minideb:buster
+FROM bitnami/minideb:bookworm
 
 RUN apt-get update && apt-get install -y git make curl
 COPY setup/install /root/install
